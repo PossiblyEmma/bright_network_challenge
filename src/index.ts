@@ -1,4 +1,12 @@
-import {validateJobs, validateMembers} from './validators';
+import {Job, validateJobs, validateMembers} from './validators';
+import {filterByLocation, filterByTitle} from './filters';
+
+interface Output {
+  [memberName: string]: {
+    bio: string;
+    matchedJobs: Job[];
+  };
+}
 
 async function fetchData() {
   const members = await fetch(
@@ -18,9 +26,15 @@ async function fetchData() {
 
 const {members, jobs} = await fetchData();
 
-console.log('MEMBERS:');
-console.log(members);
+const jobsByMember = members.reduce<Output>((result, member) => {
+  result[member.name] = {
+    bio: member.bio,
+    matchedJobs: filterByTitle({
+      member,
+      jobs: filterByLocation({member, jobs}),
+    }),
+  };
+  return result;
+}, {});
 
-console.log('\n=====\n');
-console.log('JOBS:');
-console.log(jobs);
+console.log(JSON.stringify(jobsByMember, null, 2));
