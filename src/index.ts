@@ -1,6 +1,6 @@
-import {Job, Member, validateJobs, validateMembers} from './validators';
+import {validateJobs, validateMembers} from './validators';
 
-async function fetchData(): Promise<{members: Member[]; jobs: Job[]}> {
+async function fetchData() {
   const members = await fetch(
     'https://bn-hiring-challenge.fly.dev/members.json',
   )
