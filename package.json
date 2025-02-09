@@ -14,5 +14,8 @@
     "fix": "gts fix",
     "test": "jest --coverage",
     "main": "npx tsx src/index.ts"
+  },
+  "dependencies": {
+    "natural": "^8.0.1"
   }
 }
