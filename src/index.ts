@@ -1,33 +1,19 @@
-console.log('Try npm run lint/fix!');
+export async function fetchData() {
+  const members = await fetch(
+    'https://bn-hiring-challenge.fly.dev/members.json',
+  )
+    .then(response => response.json())
+    .catch(error => console.error(error));
+  const jobs = await fetch('https://bn-hiring-challenge.fly.dev/jobs.json')
+    .then(response => response.json())
+    .catch(error => console.error(error));
 
-const longString =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
+  console.log('MEMBERS:');
+  console.log(members);
 
-const trailing = 'Semicolon';
-
-const why = {am: 'I tabbed?'};
-
-const iWish = "I didn't have a trailing space...";
-
-const sicilian = true;
-
-const vizzini = sicilian ? !sicilian : sicilian;
-
-const re = /foo {3}bar/;
-
-export function doSomeStuff(
-  withThis: string,
-  andThat: string,
-  andThose: string[],
-) {
-  //function on one line
-  if (!andThose.length) {
-    return false;
-  }
-  console.log(withThis);
-  console.log(andThat);
-  console.dir(andThose);
-  console.log(longString, trailing, why, iWish, vizzini, re);
-  return;
+  console.log('\n\n\n=====\n\n\n');
+  console.log('JOBS:');
+  console.log(jobs);
 }
-// TODO: more examples
+
+void fetchData();
