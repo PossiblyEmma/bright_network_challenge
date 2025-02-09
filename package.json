@@ -12,6 +12,7 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "main": "npx tsx src/index.ts"
   }
 }
