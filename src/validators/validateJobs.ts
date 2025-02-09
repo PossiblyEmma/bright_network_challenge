@@ -1,7 +1,4 @@
-export interface Job {
-  title: string;
-  location: string;
-}
+import {Job} from '../types';
 
 export function validateJobs(jobs: unknown): asserts jobs is Job[] {
   const jobsAsType = jobs as Job[];

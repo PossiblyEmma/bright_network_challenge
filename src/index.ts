@@ -1,12 +1,7 @@
-import {Job, validateJobs, validateMembers} from './validators';
 import {filterByLocation, filterByTitle} from './filters';
+import {validateJobs, validateMembers} from './validators';
 
-interface Output {
-  [memberName: string]: {
-    bio: string;
-    matchedJobs: Job[];
-  };
-}
+import {Output} from './types';
 
 async function fetchData() {
   const members = await fetch(

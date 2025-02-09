@@ -1,24 +1,23 @@
-import {Job, Member} from '../validators';
+import {Job, Member} from '../types';
 
-import natural from 'natural';
+import {PorterStemmer} from 'natural/lib/natural/stemmers';
+import {WordTokenizer} from 'natural/lib/natural/tokenizers';
 
 interface FilterByTitleOptions {
   member: Member;
   jobs: Job[];
 }
 
-const tokenizer = new natural.WordTokenizer();
+const tokenizer = new WordTokenizer();
 
 export function filterByTitle({member, jobs}: FilterByTitleOptions) {
   const {bio} = member;
   const bioTokens = tokenizer.tokenize(bio.toLowerCase());
-  const bioStems = bioTokens.map(token => natural.PorterStemmer.stem(token));
+  const bioStems = bioTokens.map(token => PorterStemmer.stem(token));
 
   const relevantJobs = jobs.filter(({title}) => {
     const titleTokens = tokenizer.tokenize(title.toLowerCase());
-    const titleStems = titleTokens.map(token =>
-      natural.PorterStemmer.stem(token),
-    );
+    const titleStems = titleTokens.map(token => PorterStemmer.stem(token));
     return titleStems.some(stem => bioStems.includes(stem));
   });
 

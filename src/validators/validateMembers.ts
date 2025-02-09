@@ -1,7 +1,4 @@
-export interface Member {
-  name: string;
-  bio: string;
-}
+import {Member} from '../types';
 
 export function validateMembers(members: unknown): asserts members is Member[] {
   const membersAsType = members as Member[];

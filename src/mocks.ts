@@ -1,4 +1,4 @@
-import {Job, Member} from './validators';
+import {Job, Member} from './types';
 
 export const mockJobs: Job[] = [
   {title: 'Podcaster', location: 'Glasgow'},

@@ -1,13 +1,14 @@
-import {Job, Member} from '../validators';
+import {Job, Member} from '../types';
 
-import natural from 'natural';
+import {PorterStemmer} from 'natural/lib/natural/stemmers';
+import {WordTokenizer} from 'natural/lib/natural/tokenizers';
 
 interface FilterByLocationOptions {
   member: Member;
   jobs: Job[];
 }
 
-const tokenizer = new natural.WordTokenizer();
+const tokenizer = new WordTokenizer();
 
 /**
  * Filter jobs list to include only jobs with a location that's relevant
@@ -20,7 +21,7 @@ export function filterByLocation({member, jobs}: FilterByLocationOptions) {
 
   const {bio} = member;
   const tokens = tokenizer.tokenize(bio.toLowerCase());
-  const stems = tokens.map(token => natural.PorterStemmer.stem(token));
+  const stems = tokens.map(token => PorterStemmer.stem(token));
 
   const foundLocations = stems.filter(stem => uniqueLocations.includes(stem));
 
@@ -28,7 +29,7 @@ export function filterByLocation({member, jobs}: FilterByLocationOptions) {
   if (foundLocations.length === 0) return jobs;
 
   // Bio specifies a location to exclude
-  const outsideStem = natural.PorterStemmer.stem('outside');
+  const outsideStem = PorterStemmer.stem('outside');
   if (stems.includes(outsideStem)) {
     const index = stems.indexOf(outsideStem);
     const locationToExclude = stems
@@ -41,7 +42,7 @@ export function filterByLocation({member, jobs}: FilterByLocationOptions) {
   }
 
   // Bio contains a target location to prioritise over other locations mentioned
-  const relocateStem = natural.PorterStemmer.stem('relocate');
+  const relocateStem = PorterStemmer.stem('relocate');
   if (stems.includes(relocateStem)) {
     const index = stems.indexOf(relocateStem);
     const targetLocation = stems
