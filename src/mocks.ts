@@ -4,7 +4,7 @@ export const mockJobs: Job[] = [
   {title: 'Podcaster', location: 'Glasgow'},
   {title: 'Actor', location: 'London'},
   {title: 'Producer', location: 'Bern'},
-  {title: 'Actor', location: 'Bern'},
+  {title: 'Voice Actor', location: 'Bern'},
   {title: 'Podcaster', location: 'London'},
 ];
 
