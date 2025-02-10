@@ -4,6 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ESNext",
+    "esModuleInterop": true,
     "rootDir": ".",
     "outDir": "build"
   },
