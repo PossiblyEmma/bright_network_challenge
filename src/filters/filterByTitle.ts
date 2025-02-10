@@ -10,6 +10,10 @@ interface FilterByTitleOptions {
 
 const tokenizer = new WordTokenizer();
 
+/**
+ * Filter jobs list to include only jobs with a title that's relevant
+ * to the provided member, based on their bio.
+ */
 export function filterByTitle({member, jobs}: FilterByTitleOptions) {
   const {bio} = member;
   const bioTokens = tokenizer.tokenize(bio.toLowerCase());
