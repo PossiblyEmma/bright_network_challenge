@@ -3,7 +3,7 @@ import {Job} from '../types';
 export function validateJobs(jobs: unknown): asserts jobs is Job[] {
   const jobsAsType = jobs as Job[];
 
-  if (typeof jobsAsType.forEach !== 'function')
+  if (!(jobsAsType instanceof Array))
     throw new Error('Jobs data is not an array');
 
   jobsAsType.forEach((job, index) => {

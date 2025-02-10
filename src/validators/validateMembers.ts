@@ -3,7 +3,7 @@ import {Member} from '../types';
 export function validateMembers(members: unknown): asserts members is Member[] {
   const membersAsType = members as Member[];
 
-  if (typeof membersAsType.forEach !== 'function')
+  if (!(membersAsType instanceof Array))
     throw new Error('Members data is not an array');
 
   membersAsType.forEach((member, index) => {
